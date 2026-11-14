@@ -25,3 +25,7 @@ simrand: vectors.hex rtl/crc32_serial.v tb/tb_crc32_rand.v
 simpar: vectors.hex rtl/crc32_par.v tb/tb_crc32_par.v
 	iverilog -g2012 -o crc_par.vvp rtl/crc32_par.v tb/tb_crc32_par.v
 	vvp crc_par.vvp
+
+simerr: vectors.hex rtl/crc32_par.v tb/tb_crc32_err.v
+	iverilog -g2012 -o crc_err.vvp rtl/crc32_par.v tb/tb_crc32_err.v
+	vvp crc_err.vvp
