@@ -12,4 +12,11 @@ wave: sim
 	gtkwave crc.vcd
 
 clean:
-	rm -f *.vvp *.vcd
+	rm -f *.vvp *.vcd vectors.hex
+
+vectors.hex: scripts/gen_vectors.py
+	python3 scripts/gen_vectors.py
+
+simrand: vectors.hex rtl/crc32_serial.v tb/tb_crc32_rand.v
+	iverilog -g2012 -o crc_rand.vvp rtl/crc32_serial.v tb/tb_crc32_rand.v
+	vvp crc_rand.vvp
